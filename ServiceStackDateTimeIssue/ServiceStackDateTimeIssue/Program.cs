@@ -10,7 +10,22 @@ namespace ServiceStackDateTimeIssue
     {
         static void Main()
         {
-            Console.WriteLine(GetResponseJson());
+            var utcDateStr = GetResponseJson();
+
+            Console.WriteLine(utcDateStr); //"2014-08-27 14:30:23"
+            
+            var utcDate = DateTime.Parse(utcDateStr);
+            
+            Console.WriteLine(utcDate); //"2014-08-27 14:30:23" - Kind = Unspecified
+            
+            Console.WriteLine(utcDate.ToUniversalTime()); //"2014-08-27 12:30:23" - Kind = UTC
+
+            /* Why is this time changed when doing ToUniversalTime()
+             * as AssumeUtc = true is set? Should this not make Unspecified Kind
+             be handled as Utc?*/
+            
+            Console.WriteLine(utcDate.ToLocalTime()); //"2014-08-27 16:30:23" - Kind = Local
+            
             Console.Read();
         }
 
