@@ -24,8 +24,6 @@ namespace ServiceStackServer
         public override void Configure(Container container)
         {
             JsConfig.AssumeUtc = true;
-            //JsConfig.AlwaysUseUtc = true;
-            //JsConfig.DateHandler = DateHandler.ISO8601;
             Routes.Add<GetDateTime>("/GetDateTime", "GET POST");
         }
     }

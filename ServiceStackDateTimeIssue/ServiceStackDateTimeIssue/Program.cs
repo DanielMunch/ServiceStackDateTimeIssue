@@ -10,28 +10,29 @@ namespace ServiceStackDateTimeIssue
     {
         static void Main()
         {
-            var utcDateStr = GetResponseJson();
+            const string dateTimeUrlWithTime = "http://localhost:60577/json/reply/GetDateTime?DateTime=2014-08-27 14:30:23";
+            const string dateTimeUrl = "http://localhost:60577/json/reply/GetDateTime?DateTime=2014-08-27";                      
 
-            Console.WriteLine(utcDateStr); //"2014-08-27 14:30:23"
-            
-            var utcDate = DateTime.Parse(utcDateStr);
-            
-            Console.WriteLine(utcDate); //"2014-08-27 14:30:23" - Kind = Unspecified
-            
-            Console.WriteLine(utcDate.ToUniversalTime()); //"2014-08-27 12:30:23" - Kind = UTC
+            /**************************************/
 
-            /* Why is this time changed when doing ToUniversalTime()
-             * as AssumeUtc = true is set? Should this not make Unspecified Kind
-             be handled as Utc?*/
-            
-            Console.WriteLine(utcDate.ToLocalTime()); //"2014-08-27 16:30:23" - Kind = Local
-            
+            //With time specified
+            Console.WriteLine(dateTimeUrlWithTime);
+            var dateStr = GetResponseJson(dateTimeUrlWithTime);
+            Console.WriteLine(dateStr); //Kind = Utc as expected
+
+            //Without time specified
+            Console.WriteLine(dateTimeUrl);
+            var dateStr2 = GetResponseJson(dateTimeUrl);
+            Console.WriteLine(dateStr2); //Kind = Local - This is unexpected
+
+            /**************************************/
+
             Console.Read();
         }
 
-        private static string GetResponseJson()
+        private static string GetResponseJson(string url)
         {            
-            var request = WebRequest.Create("http://localhost:60577/json/reply/GetDateTime?DateTime=2014-08-27 14:30:23");
+            var request = WebRequest.Create(url);
             request.Method = HttpMethods.Get;
 
             JObject response;
