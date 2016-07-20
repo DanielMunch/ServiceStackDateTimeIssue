@@ -45,7 +45,7 @@ IF NOT DEFINED KUDU_SYNC_CMD (
   IF !ERRORLEVEL! NEQ 0 goto error
 
   :: Locally just running "kuduSync" would also work
-  SET KUDU_SYNC_CMD=%appdata%\npm\kuduSync.cmd
+  SET KUDU_SYNC_CMD=node "%appdata%\npm\node_modules\kuduSync\bin\kuduSync"
 )
 IF NOT DEFINED DEPLOYMENT_TEMP (
   SET DEPLOYMENT_TEMP=%temp%\___deployTemp%random%
@@ -53,12 +53,14 @@ IF NOT DEFINED DEPLOYMENT_TEMP (
 )
 
 IF DEFINED CLEAN_LOCAL_DEPLOYMENT_TEMP (
+  echo Creating deployment temp at %DEPLOYMENT_TEMP%
   IF EXIST "%DEPLOYMENT_TEMP%" rd /s /q "%DEPLOYMENT_TEMP%"
   mkdir "%DEPLOYMENT_TEMP%"
 )
 
 IF DEFINED MSBUILD_PATH goto MsbuildPathDefined
-SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
+:: SET MSBUILD_PATH=%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe
+SET MSBUILD_PATH=%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild.exe
 :MsbuildPathDefined
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -75,21 +77,12 @@ IF /I "ServiceStackDateTimeIssueV2\ServiceStackDateTimeIssue.sln" NEQ "" (
 
 :: 2. Building test project
 echo Building test project
-"%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\ServiceStackServer2Tests\ServiceStackServer2Tests.csproj"
+"%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\ServiceStackDateTimeIssueV2\ServiceStackServer2Tests\ServiceStackServer2Tests.csproj" /nologo /verbosity:m /t:Build /p:Configuration=Debug
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 3. Running tests
 echo Running tests
-vstest.console.exe "%DEPLOYMENT_SOURCE%\ServiceStackServer2Tests\bin\Debug\ServiceStackServer2Tests.dll"
-IF !ERRORLEVEL! NEQ 0 goto error
-
-:: 4. Build to the temporary path
-IF /I "%IN_PLACE_DEPLOYMENT%" NEQ "1" (
-  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\ServiceStackDateTimeIssueV2\ServiceStackServerV2\ServiceStackServer\ServiceStackServer2.csproj" /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="%DEPLOYMENT_TEMP%";AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\ServiceStackDateTimeIssueV2\\" %SCM_BUILD_ARGS%
-) ELSE (
-  call :ExecuteCmd "%MSBUILD_PATH%" "%DEPLOYMENT_SOURCE%\ServiceStackDateTimeIssueV2\ServiceStackServerV2\ServiceStackServer\ServiceStackServer2.csproj" /nologo /verbosity:m /t:Build /p:AutoParameterizationWebConfigConnectionStrings=false;Configuration=Release;UseSharedCompilation=false /p:SolutionDir="%DEPLOYMENT_SOURCE%\ServiceStackDateTimeIssueV2\\" %SCM_BUILD_ARGS%
-)
-
+vstest.console.exe "%DEPLOYMENT_SOURCE%\ServiceStackDateTimeIssueV2\ServiceStackServer2Tests\bin\Debug\ServiceStackServer2Tests.dll"
 IF !ERRORLEVEL! NEQ 0 goto error
 
 :: 5. KuduSync
