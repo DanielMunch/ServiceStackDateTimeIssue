@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackServer", "Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackServer2", "ServiceStackServerV2\ServiceStackServer\ServiceStackServer2.csproj", "{DE2B265A-390D-4C6C-9251-0CCE11A22AFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStackServer2Tests", "ServiceStackServer2Tests\ServiceStackServer2Tests.csproj", "{CA98B3C0-E844-4B07-89F4-75871FF2F801}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{DE2B265A-390D-4C6C-9251-0CCE11A22AFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE2B265A-390D-4C6C-9251-0CCE11A22AFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE2B265A-390D-4C6C-9251-0CCE11A22AFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA98B3C0-E844-4B07-89F4-75871FF2F801}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA98B3C0-E844-4B07-89F4-75871FF2F801}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA98B3C0-E844-4B07-89F4-75871FF2F801}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA98B3C0-E844-4B07-89F4-75871FF2F801}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
