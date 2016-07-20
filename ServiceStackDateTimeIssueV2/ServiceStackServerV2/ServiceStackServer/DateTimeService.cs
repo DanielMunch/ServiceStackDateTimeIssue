@@ -18,7 +18,7 @@ namespace ServiceStackServer
                 request.DateTime.Second,
                 request.DateTime.Kind)
             };
-        }
+        }        
     }
 
     public class GetDateTime2 : IReturn<GetDateTimeResponse>
@@ -29,5 +29,13 @@ namespace ServiceStackServer
     public class GetDateTimeResponse
     {
         public string Value { get; set; }
+    }
+
+    public class TestMe
+    {
+        public DateTime GetCurrentDateTimeAsUtc()
+        {
+            return DateTime.UtcNow;
+        }
     }
 }
