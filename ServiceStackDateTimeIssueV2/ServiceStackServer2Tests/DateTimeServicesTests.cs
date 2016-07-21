@@ -15,12 +15,12 @@ namespace ServiceStackServer2Tests
             dt.Year.Should().Be(2016);
         }
 
-        [Test]
-        public void GetCurrentDateTimeAsUtc_ShouldFail()
-        {
-            var dt = new TestMe().GetCurrentDateTimeAsUtc();
+        //[Test]
+        //public void GetCurrentDateTimeAsUtc_ShouldFail()
+        //{
+        //    var dt = new TestMe().GetCurrentDateTimeAsUtc();
 
-            dt.Year.Should().Be(2017);
-        }
+        //    dt.Year.Should().Be(2017);
+        //}
     }
 }
