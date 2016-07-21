@@ -4,9 +4,9 @@
 # exclude patterns (uncomment them if you want to use them):
 # *.[oa]
 # *~
-bin
+#bin
 obj
-publish/resources
+#publish/resources
 *.user
 *.suo
 /
