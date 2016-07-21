@@ -23,7 +23,7 @@ namespace ServiceStackServer
 
     public class GetDateTime2 : IReturn<GetDateTimeResponse>
     {
-        public DateTime DateTime { get; set; }
+        public DateTime DateTime { get; set; } //asd
     }
 
     public class GetDateTimeResponse
