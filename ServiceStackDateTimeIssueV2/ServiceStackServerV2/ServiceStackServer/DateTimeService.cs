@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using ServiceStack;
 
 namespace ServiceStackServer
@@ -7,6 +8,8 @@ namespace ServiceStackServer
     {
         public object Any(GetDateTime2 request)
         {
+            Thread.Sleep(1000);
+
             return new GetDateTimeResponse
             {
                 Value = string.Format("{0}-{1}-{2} {3}:{4}:{5} {6}",
