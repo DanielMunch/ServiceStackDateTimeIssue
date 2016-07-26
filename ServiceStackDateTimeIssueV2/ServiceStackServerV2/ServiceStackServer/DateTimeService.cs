@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading;
+using log4net.Appender;
 using ServiceStack;
 
 namespace ServiceStackServer2
