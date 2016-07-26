@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ServiceStackServer
+namespace ServiceStackServer2
 {
     public class Global : System.Web.HttpApplication
     {

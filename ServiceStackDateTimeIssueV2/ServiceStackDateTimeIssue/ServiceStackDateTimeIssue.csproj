@@ -68,12 +68,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ServiceStackServer\ServiceStackServer\ServiceStackServer.csproj">
-      <Project>{4389b305-b381-4b50-b1a8-bbb5259a0524}</Project>
-      <Name>ServiceStackServer</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

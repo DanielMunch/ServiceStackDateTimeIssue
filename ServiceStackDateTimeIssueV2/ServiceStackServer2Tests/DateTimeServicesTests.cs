@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
-using ServiceStackServer;
+using ServiceStackServer2;
 
 namespace ServiceStackServer2Tests
 {

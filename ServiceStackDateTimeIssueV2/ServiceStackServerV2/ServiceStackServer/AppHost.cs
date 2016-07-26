@@ -2,7 +2,7 @@
 using ServiceStack;
 using ServiceStack.Text;
 
-namespace ServiceStackServer
+namespace ServiceStackServer2
 {
     public class AppHost : AppHostBase
     {
