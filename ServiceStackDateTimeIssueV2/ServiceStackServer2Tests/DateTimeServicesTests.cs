@@ -10,13 +10,13 @@ namespace ServiceStackServer2Tests
     [TestFixture]
     public class DateTimeServiceTests
     {
-        [Test]
-        public void GetCurrentDateTimeAsUtc_ShouldBeAsExpected()
-        {
-            var dt = new TestMe().GetCurrentDateTimeAsUtc();
+        //[Test]
+        //public void GetCurrentDateTimeAsUtc_ShouldBeAsExpected()
+        //{
+        //    var dt = new TestMe().GetCurrentDateTimeAsUtc();
 
-            dt.Year.Should().Be(2016);
-        }
+        //    dt.Year.Should().Be(2016);
+        //}
 
         //[Test]
         //public void GetCurrentDateTimeAsUtc_ShouldFail()
@@ -26,50 +26,49 @@ namespace ServiceStackServer2Tests
         //    dt.Year.Should().Be(2017);
         //}
 
-        //[Test]
-        //public void ConnectionTestLocalHost()
-        //{
-        //    using (var connection = new System.Data.SqlClient.SqlConnection("Data Source=(local);Initial Catalog=master;Integrated security=true;Connection Timeout=5;"))
-        //    {
-        //        connection.Open();
-        //        connection.State.Should().Be(ConnectionState.Open);
-        //    }
-        //}
+        [Test]
+        public void ConnectionTestLocalHost()
+        {
+            using (var connection = new SqlConnection("Data Source=(local);Initial Catalog=master;Integrated security=true;Connection Timeout=5;"))
+            {
+                connection.Open();
+                connection.State.Should().Be(ConnectionState.Open);
+                connection.Close();
+            }
+        }
 
-        //[Test]
-        //public void ConnectionTestDev02Ip15()
-        //{
-        //    using (var connection = new System.Data.SqlClient.SqlConnection("Server=192.168.128.15,1433;Database=FMS;User ID=damu;Password=pXfeN5wT;Max Pool Size=1024;Connection Timeout=5;"))
-        //    {
-        //        connection.Open();
-        //        connection.State.Should().Be(ConnectionState.Open);
+        [Test]
+        public void ConnectionTestDev02Ip15()
+        {
+            using (var connection = new SqlConnection("Server=192.168.128.15,1433;Database=FMS;User ID=damu;Password=pXfeN5wT;Max Pool Size=1024;Connection Timeout=5;"))
+            {
+                connection.Open();
+                connection.State.Should().Be(ConnectionState.Open);
+                connection.Close();
+            }
+        }
 
-        //        const string str = "CREATE DATABASE AzureTest";
+        [Test]
+        public void ConnectionTestProdIp51()
+        {
+            using (var connection = new SqlConnection("Server=192.168.128.51,1433;Database=FMS;User ID=ikasEhuFAmiZ;Password=UQy4EZYdaZY2;Max Pool Size=1024;Connection Timeout=5;"))
+            {
+                connection.Open();
+                connection.State.Should().Be(ConnectionState.Open);
+                connection.Close();
+            }
+        }
 
-        //        SqlCommand myCommand = new SqlCommand(str, connection);
-        //        myCommand.ExecuteNonQuery();
-        //    }
-        //}
-
-        //[Test]
-        //public void ConnectionTestProdIp51()
-        //{
-        //    using (var connection = new System.Data.SqlClient.SqlConnection("Server=192.168.128.51,1433;Database=FMS;User ID=ikasEhuFAmiZ;Password=UQy4EZYdaZY2;Max Pool Size=1024;Connection Timeout=5;"))
-        //    {
-        //        connection.Open();
-        //        connection.State.Should().Be(ConnectionState.Open);
-        //    }
-        //}
-
-        //[Test]
-        //public void ConnectionTestAzureProd()
-        //{
-        //    using (var connection = new System.Data.SqlClient.SqlConnection("Server=13.94.159.4,1433;;Database=FMS;User ID=ikasEhuFAmiZ;Password=UQy4EZYdaZY2;Max Pool Size=1024;Connection Timeout=5;"))
-        //    {
-        //        connection.Open();
-        //        connection.State.Should().Be(ConnectionState.Open);
-        //    }
-        //}
+        [Test]
+        public void ConnectionTestAzureProd()
+        {
+            using (var connection = new SqlConnection("Server=13.94.159.4,1433;;Database=FMS;User ID=ikasEhuFAmiZ;Password=UQy4EZYdaZY2;Max Pool Size=1024;Connection Timeout=5;"))
+            {
+                connection.Open();
+                connection.State.Should().Be(ConnectionState.Open);
+                connection.Close();
+            }
+        }
 
         [Test]
         public void ConnectionTestAzureDev()
@@ -78,11 +77,11 @@ namespace ServiceStackServer2Tests
             {
                 connection.Open();
                 connection.State.Should().Be(ConnectionState.Open);
+                connection.Close();
+                //const string str = "CREATE DATABASE AzureTests";
 
-                const string str = "CREATE DATABASE AzureTests";
-
-                SqlCommand myCommand = new SqlCommand(str, connection);
-                myCommand.ExecuteNonQuery();
+                //SqlCommand myCommand = new SqlCommand(str, connection);
+                //myCommand.ExecuteNonQuery();
             }
         }
 
@@ -93,6 +92,7 @@ namespace ServiceStackServer2Tests
             {
                 connection.Open();
                 connection.State.Should().Be(ConnectionState.Open);
+                connection.Close();
             }
         }
 
@@ -103,6 +103,18 @@ namespace ServiceStackServer2Tests
             {
                 connection.Open();
                 connection.State.Should().Be(ConnectionState.Open);
+                connection.Close();
+            }
+        }
+
+        [Test]
+        public void ConnectionTestAzureInternalDb()
+        {
+            using (var connection = new SqlConnection("Server=tcp:trackunit-unittest.database.windows.net,1433;Initial Catalog={name};Persist Security Info=False;User ID=unittest;Password=!Unit45T3st;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30"))
+            {
+                connection.Open();
+                connection.State.Should().Be(ConnectionState.Open);
+                connection.Close();
             }
         }
     }
