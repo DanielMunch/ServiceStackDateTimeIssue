@@ -107,15 +107,15 @@ namespace ServiceStackServer2Tests
         //    }
         //}
 
-        [Test]
-        public void ConnectionTestAzureInternalDb()
-        {
-            using (var connection = new SqlConnection("Server=trackunit-unittest.database.windows.net,1433;Persist Security Info=False;User ID=unittest;Password=!Unit45T3st;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=5"))
-            {
-                connection.Open();
-                connection.State.Should().Be(ConnectionState.Open);
-                connection.Close();
-            }
-        }
+        //[Test]
+        //public void ConnectionTestAzureInternalDb()
+        //{
+        //    using (var connection = new SqlConnection("Server=trackunit-unittest.database.windows.net,1433;Persist Security Info=False;User ID=unittest;Password=!Unit45T3st;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=5"))
+        //    {
+        //        connection.Open();
+        //        connection.State.Should().Be(ConnectionState.Open);
+        //        connection.Close();
+        //    }
+        //}
     }
 }
