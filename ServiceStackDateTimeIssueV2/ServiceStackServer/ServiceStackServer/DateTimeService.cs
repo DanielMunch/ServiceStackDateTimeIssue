@@ -14,6 +14,11 @@ namespace ServiceStackServer
             };
         }
     }
+    
+    public class GetDateTime2 : IReturn<GetDateTimeResponse>
+    {
+        public string Text { get; set; }
+    }
 
     public class GetDateTime : IReturn<GetDateTimeResponse>
     {
